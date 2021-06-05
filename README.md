@@ -31,3 +31,5 @@ La aplicación es totalmente interactiva, cuenta con interfaz amigable y facil d
 "inquirer": "^8.1.0",
 "uuid": "^8.3.2"
 ```
+
+### Te invito a contribuir y a añadir mas funcionalidades!
