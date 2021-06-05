@@ -7,6 +7,7 @@ const {
   listarBorrar,
   confirmar,
   listarChecklist,
+  listarEditar,
 } = require("./helpers/inquirer");
 const Tasks = require("./models/Tasks");
 
@@ -42,6 +43,11 @@ const main = async () => {
         tareas.toggleCompletadas(ids);
         break;
       case "6":
+        const [idT, desT] = await listarEditar(tareas.listArrray);
+        const nuevaDesc = await leerInput(`Va editar la tarea: ${idT.toString().yellow} con descripción: "${desT.toString().yellow}" \n${'>'.yellow} Ingrese la nueva descripción: `);
+        tareas.editarTarea(idT, nuevaDesc);
+        break;
+      case "7":
         const id = await listarBorrar(tareas.listArrray);
         const ok = await confirmar("¿Seguro quieres borrar esta tarea?");
         if (ok) {

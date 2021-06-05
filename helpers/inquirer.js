@@ -29,7 +29,11 @@ const menuOpts = [
       },
       {
         value: "6",
-        name: `${"6.".cyan} Borrar tarea`,
+        name: `${"6.".cyan} Editar tarea`,
+      },
+      {
+        value: "6",
+        name: `${"7.".cyan} Borrar tarea`,
       },
       {
         value: "0",
@@ -111,7 +115,7 @@ const confirmar = async (message) => {
     },
   ];
 
-  const {ok} = await inquirer.prompt(question);
+  const { ok } = await inquirer.prompt(question);
   return ok;
 };
 
@@ -121,7 +125,7 @@ const listarChecklist = async (tareas = []) => {
     return {
       value: tarea.id,
       name: `${idx.toString().cyan} ${tarea.describe}`,
-      checked: (tarea.completadoEn) ? true : false
+      checked: tarea.completadoEn ? true : false,
     };
   });
 
@@ -137,11 +141,33 @@ const listarChecklist = async (tareas = []) => {
   return ids;
 };
 
+const listarEditar = async (tareas = []) => {
+  const choices = tareas.map((tarea, i) => {
+    let idx = i + 1;
+    return {
+      value: [tarea.id, tarea.describe],
+      name: `${idx.toString().green}. ${tarea.describe}`,
+    };
+  });
+
+  const questions = [
+    {
+      type: "list",
+      name: "id",
+      message: "\nEditando tarea -> ",
+      choices,
+    },
+  ];
+  const {id} = await inquirer.prompt(questions);
+  return id;
+};
+
 module.exports = {
   inquirerMenu,
   pausaMenu,
   leerInput,
   listarBorrar,
   confirmar,
-  listarChecklist
+  listarChecklist,
+  listarEditar,
 };

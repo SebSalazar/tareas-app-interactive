@@ -16,8 +16,8 @@ class Tasks {
     this._listado = {};
   }
 
-  borrarTarea(id = ''){
-    if(this._listado[id]){
+  borrarTarea(id = "") {
+    if (this._listado[id]) {
       delete this._listado[id];
     }
   }
@@ -30,8 +30,13 @@ class Tasks {
 
   crearTarea(desc = "") {
     const tarea = new Tarea(desc);
-
     this._listado[tarea.id] = tarea; // Inserta un elemento tarea al objeto
+  }
+
+  editarTarea(id = "", desc = "") {
+    const tareaAux = this._listado[id];
+    tareaAux.describe = desc;
+    this._listado[id] = tareaAux;
   }
 
   listCompleta() {
@@ -62,19 +67,19 @@ class Tasks {
     });
   }
 
-  toggleCompletadas (ids = []) {
-    ids.forEach(id => {
+  toggleCompletadas(ids = []) {
+    ids.forEach((id) => {
       const tarea = this._listado[id];
-      if(!tarea.completadoEn){
+      if (!tarea.completadoEn) {
         tarea.completadoEn = new Date().toISOString();
       }
-    })
+    });
 
-    this.listArrray.forEach(tarea => {
-      if(!ids.includes(tarea.id)){
+    this.listArrray.forEach((tarea) => {
+      if (!ids.includes(tarea.id)) {
         this._listado[tarea.id].completadoEn = null;
       }
-    })
+    });
   }
 }
 
