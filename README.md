@@ -9,6 +9,7 @@ Este proyecto se basa en una aplicación de escritorio para crear, listar y hace
 - Listar tareas completadas
 - Listar tareas pendientes
 - Completar tarea
+- Editar tarea
 - Borrar tarea
 
 La aplicación es totalmente interactiva, cuenta con interfaz amigable y facil de entender
